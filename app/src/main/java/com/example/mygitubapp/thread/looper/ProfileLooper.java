@@ -7,7 +7,9 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.mygitubapp.model.User;
 import com.example.mygitubapp.model.datasource.remote.HttpUrlConnectionHelper;
+import com.google.gson.Gson;
 
 import java.io.IOException;
 
@@ -18,6 +20,7 @@ public class ProfileLooper extends Thread implements HttpUrlConnectionHelper.Htt
     private Handler mainHandler;
     private Handler workHandler;
     private static Message msg;
+    private User user;
 
 
     public ProfileLooper(final Handler myHandler) {
@@ -46,9 +49,9 @@ public class ProfileLooper extends Thread implements HttpUrlConnectionHelper.Htt
 
     @Override
     public void onHttpUrlConnectionResponse(String json) {
-        Log.d(TAG, "onHttpUrlConnectionResponse: json: " + json);
+        user = new Gson().fromJson(json, User.class);
+        Log.d(TAG, "onHttpUrlConnectionResponse: user: " + user.toString());
 
-        
     }
 
     @Override
