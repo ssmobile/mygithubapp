@@ -106,7 +106,7 @@
         android:id="@+id/reposNumTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_circle"
+        android:background="@drawable/shape_circle_56dp"
         android:textAlignment="center"
         android:onClick="onClick"
         android:gravity="center"

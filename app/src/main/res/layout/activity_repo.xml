@@ -5,14 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".RepoActivity">
 
-    <ScrollView
-        android:id="@+id/log_scrollview"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/reposRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView
-            android:id="@+id/logTV"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        android:layout_height="match_parent" />
 
-    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
