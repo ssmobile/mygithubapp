@@ -9,9 +9,10 @@ import android.widget.TextView;
 
 import com.example.mygitubapp.model.User;
 import com.example.mygitubapp.model.datasource.remote.HttpUrlConnectionHelper;
-import com.example.mygitubapp.thread.asynctask.ProfileAsyncTask;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity implements HttpUrlConnectionHelper.HttpCallback {
 
@@ -35,7 +36,18 @@ public class MainActivity extends AppCompatActivity implements HttpUrlConnection
     protected void onResume() {
         super.onResume();
         Log.d(TAG, "onResume: ");
-        new ProfileAsyncTask().execute(this);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    HttpUrlConnectionHelper
+                            .getMyProfile(MainActivity.this);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).run();
     }
 
     @Override
