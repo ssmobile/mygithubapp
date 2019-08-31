@@ -10,7 +10,7 @@ public class HttpUrlConnectionHelper {
     private static HttpURLConnection httpURLConnection;
     private static URL url;
 
-    public static void getMyProfile(HttpCallback callback) throws IOException {
+    public static String getMyProfile(HttpCallback callback) throws IOException {
 //
 //        String my_jwt = "eyJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1NjcxOTYyNDYsImV4cCI6MTU2NzE5Njg0NiwiaXN" +
 //                "zIjozOTkzOX0.QLC7lEK6LI2FeXTE4YYikZksYdH2M3Bclf-vurtv95S7wBkHQu044GpAz5qskZdOQQl_" +
@@ -28,8 +28,9 @@ public class HttpUrlConnectionHelper {
 //        httpURLConnection.setRequestProperty("Accept", accept);
 //        httpURLConnection = (HttpURLConnection)url.openConnection();
 //        httpURLConnection.setDoInput(true);
-//        httpURLConnection.setDoInput(true);
-        String jsonResponse = getJSONResponse();
+//        httpURLConnection.setDoOutput(true);
+          String jsonResponse = getJSONResponse();
+
 
 //        httpURLConnection.toString();
 //        InputStream inputStream = httpURLConnection.getInputStream();
@@ -41,9 +42,9 @@ public class HttpUrlConnectionHelper {
 //        }
 //
 //        httpURLConnection.disconnect();
-//        callback.onHttpUrlConnectionResponse(jsonResponse);
-
         callback.onHttpUrlConnectionResponse(jsonResponse);
+
+       return jsonResponse;
     }
 
     public interface HttpCallback {
