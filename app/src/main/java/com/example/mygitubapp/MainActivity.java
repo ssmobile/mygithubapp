@@ -2,6 +2,7 @@ package com.example.mygitubapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
@@ -37,21 +38,21 @@ public class MainActivity extends AppCompatActivity implements HttpUrlConnection
         super.onResume();
         Log.d(TAG, "onResume: ");
 
-        new Thread(new Runnable() {
+        AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
                 try {
-                    HttpUrlConnectionHelper
-                            .getMyProfile(MainActivity.this);
+                    HttpUrlConnectionHelper.getMyProfile(MainActivity.this);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-        }).run();
+        });
     }
 
     @Override
     public void onHttpUrlConnectionResponse(String json) {
+        Log.d(TAG, "response: json: " + json);
         Gson gson = new Gson();
         User user = gson.fromJson(json, User.class);
         Log.d(TAG, "onHttpUrlConnectionResponse: user: " + user.toString());
