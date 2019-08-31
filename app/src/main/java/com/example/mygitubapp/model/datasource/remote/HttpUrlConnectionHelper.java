@@ -1,21 +1,13 @@
 package com.example.mygitubapp.model.datasource.remote;
 
-import android.util.Log;
-
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.Buffer;
 import java.nio.charset.StandardCharsets;
 
 public class HttpUrlConnectionHelper {
-    public static final String USER_PROFILE_URL = "https://api.github.com/users/ssmobile";
+    private static final String USER_PROFILE_URL = "https://api.github.com/users/ssmobile";
     private static final String TAG = "TAG_ConnectionHelper";
 
     public static void getMyProfile(HttpCallback callback) throws IOException {
@@ -41,7 +33,7 @@ public class HttpUrlConnectionHelper {
         return jsonBuilder.toString();
     }
 
-    public static String getDummyJSON() {
+    private static String getDummyJSON() {
         return "{\n" +
                 "  \"login\": \"ssmobile\",\n" +
                 "  \"id\": 54039487,\n" +
