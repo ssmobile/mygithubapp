@@ -2,9 +2,12 @@ package com.example.mygitubapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,8 +27,7 @@ public class MainActivity extends AppCompatActivity implements HttpUrlConnection
     private TextView companyTV;
     private TextView locationTV;
     private TextView bioTV;
-    private TextView reposNumTV;
-
+    private TextView reposNumBTN;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements HttpUrlConnection
         companyTV = findViewById(R.id.companyTV);
         locationTV = findViewById(R.id.locationTV);
         bioTV = findViewById(R.id.bioTV);
-        reposNumTV = findViewById(R.id.reposNumTV);
+        reposNumBTN = findViewById(R.id.reposNumTV);
     }
 
     private void populateViews(final User user) {
@@ -80,9 +82,14 @@ public class MainActivity extends AppCompatActivity implements HttpUrlConnection
                 companyTV.setText(user.getCompany());
                 bioTV.setText(user.getBio());
                 String repos = "" + user.getPublicRepos();
-                reposNumTV.setText(repos);
+                reposNumBTN.setText(repos);
             }
         });
-
     }
+
+    public void onClick(View v) {
+        startActivity(new Intent(this,RepoActivity.class));
+    }
+
+
 }
