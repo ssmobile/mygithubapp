@@ -53,11 +53,8 @@ public class MainActivity extends AppCompatActivity implements HttpUrlConnection
     @Override
     public void onHttpUrlConnectionResponse(String json) {
         Log.d(TAG, "response: json: " + json);
-        Gson gson = new Gson();
-        User user = gson.fromJson(json, User.class);
+        User user = new Gson().fromJson(json, User.class);
         Log.d(TAG, "onHttpUrlConnectionResponse: user: " + user.toString());
-
-
         populateViews(user);
     }
 
