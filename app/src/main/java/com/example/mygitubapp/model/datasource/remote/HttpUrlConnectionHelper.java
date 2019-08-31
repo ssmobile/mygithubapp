@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
 public class HttpUrlConnectionHelper {
     private static final String USER_PROFILE_URL = "https://api.github.com/users/ssmobile";
@@ -24,6 +25,7 @@ public class HttpUrlConnectionHelper {
 
     public static void getMyRepos(HttpCallback callback, Context ctx) throws IOException {
         URL url = new URL(USER_REPOS_URL);
+        ArrayList<Repo> jsonResponse = new ArrayList<>();
         InputStreamReader in =
                 new InputStreamReader(url.openStream(),StandardCharsets.UTF_8);
         Gson gson = new GsonBuilder().create();
@@ -33,16 +35,16 @@ public class HttpUrlConnectionHelper {
                 Log.d(TAG, "getMyRepos: reader" + reader);
                 Repo repo = gson.fromJson(reader,Repo.class);
                 Log.d(TAG, "getMyRepos: repo:" + repo.toString());
+                jsonResponse.add(repo);
             }
         } catch (Exception e) {
 
         }
 
-
-//        callback.onHttpUrlConnectionResponse(jsonResponse);
+        callback.onHttpUrlConnectionResponse(jsonResponse);
     }
 
-    public interface HttpCallback { void onHttpUrlConnectionResponse(String json); }
+    public interface HttpCallback { void onHttpUrlConnectionResponse(Object json); }
 
     public static String getJSONResponse(String urlString) throws IOException {
         URL url = new URL(urlString);
