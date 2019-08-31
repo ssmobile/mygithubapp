@@ -1,57 +1,47 @@
 package com.example.mygitubapp.model.datasource.remote;
 
+import android.util.Log;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.Buffer;
+import java.nio.charset.StandardCharsets;
 
 public class HttpUrlConnectionHelper {
     public static final String USER_PROFILE_URL = "https://api.github.com/users/ssmobile";
-    private static HttpURLConnection httpURLConnection;
-    private static URL url;
+    private static final String TAG = "TAG_ConnectionHelper";
 
-    public static String getMyProfile(HttpCallback callback) throws IOException {
-//
-//        String my_jwt = "eyJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1NjcxOTYyNDYsImV4cCI6MTU2NzE5Njg0NiwiaXN" +
-//                "zIjozOTkzOX0.QLC7lEK6LI2FeXTE4YYikZksYdH2M3Bclf-vurtv95S7wBkHQu044GpAz5qskZdOQQl_" +
-//                "axfXNVT7qUwwq5L6G9p6ZCkbmW5nOZCm52arDnY-rXHbQe0XFR18MezE5w6yfruhehBb72wcQ3WsoQL1-" +
-//                "bWU9P7n540bhosUZfOwR_uuadNGb8RDgI1_ID67i0g3sKdFwkQm2ogETRZ3T2G8BBO7AT05Y3TygWfgC8" +
-//                "3l6N3TqqoJ9Q_GpcTJ8jw4hcn-iZCFNpY1v7A2mHFq5H1OvPntzY1vnQFupmThH9CYdiu88ztgsD8yaDt" +
-//                "yEqL2M9ZhGFEDi16Okju7X-NIuSaPUA";
-//        String accept = "application/vnd.github.machine-man-preview+json";
-//
-//        url = new URL(USER_PROFILE_URL);
-//        httpURLConnection = (HttpURLConnection)url.openConnection();
-
-//
-//        httpURLConnection.setRequestProperty("Authorization BEARER", my_jwt);
-//        httpURLConnection.setRequestProperty("Accept", accept);
-//        httpURLConnection = (HttpURLConnection)url.openConnection();
-//        httpURLConnection.setDoInput(true);
-//        httpURLConnection.setDoOutput(true);
-          String jsonResponse = getJSONResponse();
-
-
-//        httpURLConnection.toString();
-//        InputStream inputStream = httpURLConnection.getInputStream();
-//        int currentRead;
-//        while ((currentRead = inputStream.read()) != -1) {
-//            char currentChar = (char)currentRead;
-//            jsonResponse = jsonResponse + currentChar;
-//
-//        }
-//
-//        httpURLConnection.disconnect();
+    public static void getMyProfile(HttpCallback callback) throws IOException {
+        String jsonResponse = getDummyJSON();
         callback.onHttpUrlConnectionResponse(jsonResponse);
-
-       return jsonResponse;
     }
 
-    public interface HttpCallback {
-        void onHttpUrlConnectionResponse(String json);
+    public interface HttpCallback { void onHttpUrlConnectionResponse(String json); }
+
+    public static String getJSONResponse() throws IOException {
+        URL url = new URL(USER_PROFILE_URL);
+        InputStreamReader inputStreamReader =
+                new InputStreamReader(url.openStream(),StandardCharsets.UTF_8);
+        BufferedReader in = new BufferedReader(inputStreamReader);
+        StringBuilder jsonBuilder = new StringBuilder();
+        int currentRead;
+
+        while ((currentRead = in.read()) != -1) {
+            char currentChar = (char)currentRead;
+            jsonBuilder.append(currentChar);
+        }
+
+        return jsonBuilder.toString();
     }
 
-    public static String getJSONResponse() {
+    public static String getDummyJSON() {
         return "{\n" +
                 "  \"login\": \"ssmobile\",\n" +
                 "  \"id\": 54039487,\n" +
