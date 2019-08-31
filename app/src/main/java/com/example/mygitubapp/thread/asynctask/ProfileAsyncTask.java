@@ -4,7 +4,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.mygitubapp.model.datasource.remote.HttpUrlConnectionHelper;
-import com.example.mygitubapp.thread.looper.ProfileLooper;
 
 import java.io.IOException;
 
@@ -48,6 +47,5 @@ public class ProfileAsyncTask extends AsyncTask {
     protected void onCancelled(Object o) {
         super.onCancelled(o);
         Log.d(TAG, "onCancelled: ");
-
     }
 }
