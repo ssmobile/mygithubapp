@@ -7,66 +7,44 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/shape_border" >
 
         <TextView
             android:id="@+id/nameTV"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:gravity="center"
             android:text="@string/nameDummy"
-            android:textAlignment="center"
-            android:textSize="25sp"
+            style="@style/repoItem"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:textSize="40sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/lastUpdateLabelTV"
-            app:layout_constraintHorizontal_weight="4"
+            android:textColor="@color/colorPrimaryDark"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/languageTV" />
 
         <TextView
             android:id="@+id/languageTV"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            style="@style/repoItem"
             android:text="@string/languageDummy"
-            android:textSize="20sp"
-            app:layout_constraintHorizontal_weight="6"
             android:drawableStart="@drawable/shape_circle_12dp"
             android:drawablePadding="4dp"
             android:paddingStart="24dp"
             android:paddingEnd="0dp"
-            app:layout_constraintStart_toEndOf="@id/nameTV"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nameTV"
             app:layout_constraintBottom_toTopOf="@id/lastUpdateTV" />
 
         <TextView
-            android:id="@+id/lastUpdateLabelTV"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:text="@string/last_update"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:textAlignment="center"
-            app:layout_constraintHorizontal_weight="3"
-            app:layout_constraintStart_toEndOf="@id/nameTV"
-            app:layout_constraintEnd_toStartOf="@id/lastUpdateTV"
-            app:layout_constraintTop_toBottomOf="@id/languageTV"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-        <TextView
             android:id="@+id/lastUpdateTV"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
+            style="@style/repoItem"
             android:text="@string/last_update_dummy"
-            android:textAlignment="center"
-            android:gravity="center"
-            app:layout_constraintHorizontal_weight="3"
-            app:layout_constraintStart_toEndOf="@id/lastUpdateLabelTV"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/languageTV"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/languageTV" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

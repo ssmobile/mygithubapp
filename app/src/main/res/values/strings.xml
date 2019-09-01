@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">MyGitubApp</string>
     <string name="profile_image_desc">User\'s profile image</string>
-    <string name="repos_label">Repos:</string>
+    <string name="repos_label">Repositories:</string>
     <string name="language">Language</string>
     <string name="last_update">Updated</string>
-    <string name="last_update_dummy">1 year ago</string>
+    <string name="last_update_dummy">Last updated: 1 year ago</string>
     <string name="languageDummy">Java</string>
     <string name="nameDummy">My Repo</string>
 </resources>
