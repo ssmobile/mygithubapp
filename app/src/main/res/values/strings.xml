@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyGitubApp</string>
+    <string name="app_name">MyGitHubApp</string>
     <string name="profile_image_desc">User\'s profile image</string>
     <string name="repos_label">Repositories:</string>
     <string name="language">Language</string>

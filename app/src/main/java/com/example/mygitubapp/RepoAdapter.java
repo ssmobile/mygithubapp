@@ -23,7 +23,7 @@ public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.ViewHolder> {
     private static final String TAG = "TAG_RepoAdapter";
     private ArrayList<Repo> repoList;
 
-    public RepoAdapter(ArrayList<Repo> repoList) { this.repoList = repoList; }
+    RepoAdapter(ArrayList<Repo> repoList) { this.repoList = repoList; }
 
     @NonNull
     @Override
@@ -50,7 +50,7 @@ public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.ViewHolder> {
         private TextView langView;
         private TextView updateView;
 
-        public ViewHolder(@NonNull View itemView) {
+        private ViewHolder(@NonNull View itemView) {
             super(itemView);
             nameView = itemView.findViewById(R.id.nameTV);
             langView = itemView.findViewById(R.id.languageTV);
@@ -66,7 +66,7 @@ public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.ViewHolder> {
         String result = "";
 
         @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat(pattern);
-        Date date = null;
+        Date date;
         try {
             date = format.parse(repoDate);
         } catch (ParseException e) {
@@ -84,7 +84,7 @@ public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.ViewHolder> {
             if (interval !=0) {
                 String suffix = (interval == 1) ? "" : "s";
                 result = String.format(Locale.US,
-                        "%d %s%s ago", interval, timeStrings[i], suffix);
+                        "Updated %d %s%s ago", interval, timeStrings[i], suffix);
                 return result;
             }
         }
