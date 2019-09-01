@@ -6,20 +6,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
-
 import com.example.mygitubapp.model.Repo;
 import com.example.mygitubapp.model.datasource.remote.HttpUrlConnectionHelper;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static com.example.mygitubapp.model.datasource.remote.HttpUrlConnectionHelper.USER_REPOS_URL;
-
 public class RepoActivity extends AppCompatActivity implements HttpUrlConnectionHelper.HttpCallback {
 
-    private static final String TAG = "TAG_RepoActivity";
     private static ArrayList<Repo> repos;
 
     @Override
@@ -31,18 +24,13 @@ public class RepoActivity extends AppCompatActivity implements HttpUrlConnection
     @Override
     protected void onResume() {
         super.onResume();
-        try {
-            Log.d(TAG, "onResume: repos:" + repos.toString());
-        } catch (NullPointerException e) {
-            Log.e(TAG, "onResume: repos is null");
-        }
 
         if (repos == null) {
             AsyncTask.execute(new Runnable() {
                 @Override
                 public void run() {
                     try {
-                        HttpUrlConnectionHelper.getMyRepos(RepoActivity.this);
+                        HttpUrlConnectionHelper.getReposResponse(RepoActivity.this);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -57,7 +45,7 @@ public class RepoActivity extends AppCompatActivity implements HttpUrlConnection
 
     @Override
     public void onHttpUrlConnectionResponse(final Object response) {
-
+        //no unchecked cast
         repos = (ArrayList<Repo>)response;
         populateRecyclerView();
 

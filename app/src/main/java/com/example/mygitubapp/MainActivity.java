@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements HttpUrlConnection
                 @Override
                 public void run() {
                     try {
-                        HttpUrlConnectionHelper.getJSONResponse(MainActivity.this);
+                        HttpUrlConnectionHelper.getUserResponse(MainActivity.this);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements HttpUrlConnection
 
     @Override
     public void onHttpUrlConnectionResponse(Object response) {
-//        Log.d(TAG, "response: " + response.toString());
         user = new Gson().fromJson((String)response, User.class);
         Log.d(TAG, "onHttpUrlConnectionResponse: user: " + user.toString());
         populateViews(user);
