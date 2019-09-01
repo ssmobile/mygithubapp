@@ -7,7 +7,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements HttpUrlConnection
     private TextView locationTV;
     private TextView bioTV;
     private TextView reposNumBTN;
+    private static User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,22 +41,24 @@ public class MainActivity extends AppCompatActivity implements HttpUrlConnection
         super.onResume();
         Log.d(TAG, "onResume: ");
 
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    HttpUrlConnectionHelper.getMyProfile(MainActivity.this);
-                } catch (IOException e) {
-                    e.printStackTrace();
+        if (user==null) {
+            AsyncTask.execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        HttpUrlConnectionHelper.getJSONResponse(MainActivity.this);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     @Override
-    public void onHttpUrlConnectionResponse(Object json) {
-        Log.d(TAG, "response: json: " + json.toString());
-        User user = new Gson().fromJson((String)json, User.class);
+    public void onHttpUrlConnectionResponse(Object response) {
+//        Log.d(TAG, "response: " + response.toString());
+        user = new Gson().fromJson((String)response, User.class);
         Log.d(TAG, "onHttpUrlConnectionResponse: user: " + user.toString());
         populateViews(user);
     }

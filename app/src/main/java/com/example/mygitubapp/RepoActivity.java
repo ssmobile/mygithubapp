@@ -20,6 +20,7 @@ import static com.example.mygitubapp.model.datasource.remote.HttpUrlConnectionHe
 public class RepoActivity extends AppCompatActivity implements HttpUrlConnectionHelper.HttpCallback {
 
     private static final String TAG = "TAG_RepoActivity";
+    private static ArrayList<Repo> repos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,33 +31,47 @@ public class RepoActivity extends AppCompatActivity implements HttpUrlConnection
     @Override
     protected void onResume() {
         super.onResume();
+        try {
+            Log.d(TAG, "onResume: repos:" + repos.toString());
+        } catch (NullPointerException e) {
+            Log.e(TAG, "onResume: repos is null");
+        }
 
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    HttpUrlConnectionHelper.getMyRepos(RepoActivity.this, RepoActivity.this);
-                } catch (IOException e) {
-                    e.printStackTrace();
+        if (repos == null) {
+            AsyncTask.execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        HttpUrlConnectionHelper.getMyRepos(RepoActivity.this);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            populateRecyclerView();
+        }
+
+
     }
 
     @Override
-    public void onHttpUrlConnectionResponse(final Object json) {
+    public void onHttpUrlConnectionResponse(final Object response) {
 
+        repos = (ArrayList<Repo>)response;
+        populateRecyclerView();
+
+    }
+
+    private void populateRecyclerView() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                @SuppressWarnings("unchecked")
-                ArrayList<Repo> repos = (ArrayList<Repo>)json;
                 RecyclerView recyclerView = findViewById(R.id.reposRecyclerView);
                 RepoAdapter adapter = new RepoAdapter(repos);
                 recyclerView.setAdapter(adapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(RepoActivity.this));
             }
         });
-
     }
 }
