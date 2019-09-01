@@ -76,7 +76,9 @@ public class MainActivity extends AppCompatActivity implements HttpUrlConnection
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Picasso.get().load(user.getAvatarUrl()).into(profileIV);
+                Picasso.get().load(user.getAvatarUrl())
+                        .placeholder(R.drawable.placeholder_github)
+                        .into(profileIV);
 
                 loginTV.setText(user.getLogin());
                 nameTV.setText(user.getName());
