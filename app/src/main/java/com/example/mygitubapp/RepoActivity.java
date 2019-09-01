@@ -10,6 +10,7 @@ import com.example.mygitubapp.model.Repo;
 import com.example.mygitubapp.model.datasource.remote.HttpUrlConnectionHelper;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class RepoActivity extends AppCompatActivity implements HttpUrlConnectionHelper.HttpCallback {
 
@@ -56,6 +57,7 @@ public class RepoActivity extends AppCompatActivity implements HttpUrlConnection
             @Override
             public void run() {
                 RecyclerView recyclerView = findViewById(R.id.reposRecyclerView);
+                Collections.sort(repos);
                 RepoAdapter adapter = new RepoAdapter(repos);
                 recyclerView.setAdapter(adapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(RepoActivity.this));

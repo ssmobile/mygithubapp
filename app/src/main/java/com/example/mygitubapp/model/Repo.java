@@ -2,7 +2,7 @@ package com.example.mygitubapp.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Repo {
+public class Repo implements Comparable<Repo> {
 
 	@SerializedName("stargazers_count")
 	private int stargazersCount;
@@ -886,4 +886,9 @@ public class Repo {
 			",forks_count = '" + forksCount + '\'' + 
 			"}";
 		}
+
+	@Override
+	public int compareTo(Repo repo) {
+		return repo.getUpdatedAt().compareTo(this.getUpdatedAt());
+	}
 }
