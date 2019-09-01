@@ -76,7 +76,7 @@ public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.ViewHolder> {
 
         assert date != null;
         long repoMillis = date.getTime();
-        long nowMillis = new Date().getTime();
+        long nowMillis = new Date().getTime() + timemillis[3]*4;
         long diff = nowMillis - repoMillis;
 
         for (int i=0 ; i<timemillis.length ; i++) {
