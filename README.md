@@ -20,7 +20,7 @@ When the user presses on the button with the number of repositories the GitHub u
 
 ## Repository Activity
 
-![](https://github.com/ssmobile/mygithubapp/blob/master/screenshots/UserActivity.png?raw=true)
+![](https://github.com/ssmobile/mygithubapp/blob/master/screenshots/RepoActivity.png?raw=true)
 
 In this activity a RecylerView populates items containing information about the GitHub user's repositories.
 
