@@ -35,6 +35,7 @@ public class HttpUrlConnectionHelper {
             Log.e(TAG, "getReposResponse: ", e);
         }
 
+        in.close();
         callback.onHttpUrlConnectionResponse(jsonResponse);
     }
 
@@ -52,6 +53,7 @@ public class HttpUrlConnectionHelper {
             jsonBuilder.append(currentChar);
         }
 
+        in.close();
         callback.onHttpUrlConnectionResponse(jsonBuilder.toString());
     }
 
