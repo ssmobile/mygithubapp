@@ -4,7 +4,9 @@ This application is designed to make requests to the GitHub API and display the 
 
 ## User Activity
 
-![](https://github.com/ssmobile/mygithubapp/blob/master/screenshots/UserActivity.png?raw=true)
+<!--![](https://github.com/ssmobile/mygithubapp/blob/master/screenshots/UserActivity.png?raw=true) -->
+
+<img src="https://github.com/ssmobile/mygithubapp/blob/master/screenshots/UserActivity.png?raw=true" width="100">
 
 The first activity contains an ImageView for the user profile image and some Textviews displaying user information. 
 
